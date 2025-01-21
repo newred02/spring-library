@@ -6,10 +6,12 @@ import org.springframework.stereotype.Service;
 import spring.library.controller.request.RequestOfBook;
 import spring.library.controller.request.RequestOfMember;
 import spring.library.domain.Book;
+import spring.library.domain.LoanAndReturn;
 import spring.library.domain.Member;
 import spring.library.dto.BookDto;
 import spring.library.dto.MemberDto;
 import spring.library.repository.BookRepository;
+import spring.library.repository.LoanAndReturnRepository;
 import spring.library.repository.MemberRepository;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import java.util.List;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final LoanAndReturnRepository loanAndReturnRepository;
 
     public List<BookDto> findAllBook(){
         List<BookDto> bookDtoList = bookRepository.findAll().stream().map(BookDto::from).toList();
@@ -43,9 +46,13 @@ public class BookService {
         return BookDto.from(book);
     }
 
+    @Transactional
     public void deleteBookById(Long id) {
-        bookRepository.findById(id).orElseThrow(()-> new RuntimeException("Book not found"));
-        bookRepository.deleteById(id);
+        Book book = bookRepository.findById(id).orElseThrow(()-> new RuntimeException("Book not found"));
+        if(book.getStatus().equals("대출중")) {
+            throw new RuntimeException("대출중인 책은 삭제할 수 없습니다.");
+        }
+        book.setStatus("대출불가");
     }
 
 }

@@ -5,6 +5,9 @@ import lombok.*;
 import spring.library.controller.request.RequestOfBook;
 import spring.library.dto.BookDto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -22,7 +25,13 @@ public class Book {
     private Long publicationYear;
     private String classification;
     private String status;
-    private Long amount;
+
+    @OneToMany(
+            mappedBy = "book",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.REFRESH, CascadeType.REMOVE}
+    )
+    private List<LoanAndReturn> loanAndReturns = new ArrayList<>();
 
     public static Book from(RequestOfBook request) {
         return Book.builder()
@@ -32,7 +41,6 @@ public class Book {
                 .publicationYear(request.getPublicationYear())
                 .classification(request.getClassification())
                 .status(request.getStatus())
-                .amount(request.getAmount())
                 .build();
     }
 
@@ -43,7 +51,6 @@ public class Book {
         this.publicationYear = bookDto.getPublicationYear();
         this.classification = bookDto.getClassification();
         this.status = bookDto.getStatus();
-        this.amount = bookDto.getAmount();
     }
 
 }

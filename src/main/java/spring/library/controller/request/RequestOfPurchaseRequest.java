@@ -5,21 +5,21 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RequestOfBook {
+public class RequestOfPurchaseRequest {
 
+    private Long memberId;
     private String title;
     private String author;
     private String publisher;
     private Long publicationYear;
-    private String classification;
-    private String status;
+    private Long purchaseRequestCount;
 
-    public RequestOfBook(String title, String author, String publisher, Long publicationYear, String classification, String status) {
+    public RequestOfPurchaseRequest(Long memberId, String title, String author, String publisher, Long publicationYear , Long purchaseRequestCount) {
+        this.memberId = memberId;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.publicationYear = publicationYear;
-        this.classification = classification;
-        this.status = status;
+        this.purchaseRequestCount = purchaseRequestCount;
     }
 }

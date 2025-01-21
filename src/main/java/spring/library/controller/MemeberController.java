@@ -42,7 +42,7 @@ public class MemeberController {
         return ResponseEntity.ok().body("Delete Success!");
     }
 
-    @PatchMapping("/members/{id}")
+    @PutMapping("/members/{id}")
     public ResponseEntity<ResponseOfMember> updateMember(@PathVariable Long id, @RequestBody RequestOfMember request) {
         MemberDto memberDto = memberService.updateMember(id, request);
         return ResponseEntity.ok().body(ResponseOfMember.from(memberDto));

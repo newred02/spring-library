@@ -11,16 +11,16 @@ import spring.library.dto.MemberDto;
 @Setter
 public class ResponseOfMember {
 
-    private Long idNumber;
     private String name;
+    private Long idNumber;
     private String feature;
     private String email;
     private String phoneNumber;
 
     public static ResponseOfMember from(MemberDto memberDto) {
         return ResponseOfMember.builder()
-                .idNumber(memberDto.getIdNumber())
                 .name(memberDto.getName())
+                .idNumber(memberDto.getIdNumber())
                 .feature(memberDto.getFeature())
                 .email(memberDto.getEmail())
                 .phoneNumber(memberDto.getPhoneNumber())

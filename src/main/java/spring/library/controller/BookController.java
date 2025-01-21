@@ -29,7 +29,7 @@ public class BookController {
         return ResponseEntity.ok().body(ResponseOfBook.from(bookDto));
     }
 
-    @PatchMapping("/books/{id}")
+    @PutMapping("/books/{id}")
     public ResponseEntity<ResponseOfBook> updateBook(@PathVariable Long id, @RequestBody RequestOfBook request) {
         BookDto bookDto = bookService.updateBook(id, request);
         return ResponseEntity.ok().body(ResponseOfBook.from(bookDto));

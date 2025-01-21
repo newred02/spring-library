@@ -11,8 +11,8 @@ import spring.library.dto.MemberDto;
 public class ResponseOfMemberWithId {
 
     private Long id;
-    private Long idNumber;
     private String name;
+    private Long idNumber;
     private String feature;
     private String email;
     private String phoneNumber;
@@ -20,8 +20,8 @@ public class ResponseOfMemberWithId {
     public static ResponseOfMemberWithId from(MemberDto memberDto) {
         return ResponseOfMemberWithId.builder()
                 .id(memberDto.getId())
-                .idNumber(memberDto.getIdNumber())
                 .name(memberDto.getName())
+                .idNumber(memberDto.getIdNumber())
                 .feature(memberDto.getFeature())
                 .email(memberDto.getEmail())
                 .phoneNumber(memberDto.getPhoneNumber())

@@ -21,7 +21,6 @@ public class BookDto {
     private Long publicationYear;
     private String classification;
     private String status;
-    private Long amount;
 
     public static BookDto from(Book book) {
         return BookDto.builder()
@@ -32,7 +31,6 @@ public class BookDto {
                 .publicationYear(book.getPublicationYear())
                 .classification(book.getClassification())
                 .status(book.getStatus())
-                .amount(book.getAmount())
                 .build();
     }
 
@@ -44,7 +42,6 @@ public class BookDto {
                 .publicationYear(request.getPublicationYear())
                 .classification(request.getClassification())
                 .status(request.getStatus())
-                .amount(request.getAmount())
                 .build();
     }
 

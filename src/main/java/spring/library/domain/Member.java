@@ -3,7 +3,6 @@ package spring.library.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import spring.library.controller.request.RequestOfMember;
-import spring.library.dto.BookDto;
 import spring.library.dto.MemberDto;
 
 import java.util.ArrayList;
@@ -25,6 +24,22 @@ public class Member {
     private String feature;
     private String email;
     private String phoneNumber;
+
+    @OneToMany(
+            mappedBy = "member",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<LoanAndReturn> loanAndReturns = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "member",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<PurchaseRequest> purchaseRequests = new ArrayList<>();
 
     public static Member from(RequestOfMember request) {
         return Member.builder()
